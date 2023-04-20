@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>DATA ACQUISITION</title>
+    <head>
+        <link href="../static/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <!--rel="stylesheet" précise que le document en question est une feuille de style externe-->
+        <style class="cp-pen-styles">
+        @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300);
+
+                img {
+                  position: absolute;
+                  top: 50%;
+                  left: 60%;
+                  transform: translate(-50%, -50%);
+                  max-width: 180%;
+                  padding: 50px;
+                }
+
+        </style>
+
+    </head>
+    <body>
+        <!-- FORM MODULE -->
+        <div class="city_form">
+            <div class="wrap">
+                <!-- TOGGLE -->
+                <div id="toggle-wrap">
+                    <div id="toggle-terms">
+                        <div id="cross">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- TERMS -->
+
+
+                <!-- SLIDER -->
+                <div class="content">
+                    <!-- LOGO -->
+
+                        <img src="../static/images/logo3.png" alt="">
+
+                </div>
+                <!-- CITY FORM -->
+                <div class="user">
+
+                    <div class="form-wrap">
+                        <!-- TABS -->
+
+                        <!-- TABS CONTENT -->
+                    	<div class="tabs-content">
+                            <!-- TABS CONTENT  -->
+                    		<div id="content" class="active">
+                                <h3><label for="city"> Please enter the city name </label></h3><br>
+                    			<center><form action={{url_for('data')}} method="post">
+
+                    				<input type="text" class="input" id="city" placeholder=" City Name" name="city" required>
+                    				<input type="submit" class="button" value="Get Start">
+                    			</form>
+                    			</center>
+                    		</div>
+
+                    	</div>
+                	</div>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

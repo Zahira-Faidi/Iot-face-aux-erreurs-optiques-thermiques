@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>DATA ACQUISITION</title>
+    <head>
+
+        <!--rel="stylesheet" précise que le document en question est une feuille de style externe-->
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+
+        <style>
+        html, body {
+	height: 100%;
+	margin: 0; padding: 0;
+}
+body {
+	display : table;
+	width: 100%;
+}
+        body {
+          bbackground-color: #b8c6db;
+          background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+          font-family: sans-serif;
+          font-weight: 100;
+        }
+        .container {
+          position: absolute;
+          top: 55%;
+          left: 43%;
+          transform: translate(-50%, -50%);
+        }
+        table {
+          width: 800px;
+          border-collapse: collapse;
+          overflow: hidden;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        th,
+        td {
+          padding: 15px;
+          background-color: rgba(255, 255, 255, 0.2);
+          color: black;
+        }
+        th {
+          text-align: left;
+        }
+        thead th {
+          background-color: #55608f;
+        }
+        tbody tr:hover {
+          background-color: rgb(166, 166, 166, 0.3);
+        }
+        tbody td {
+          position: relative;
+        }
+        tbody td:hover:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: -9999px;
+          bottom: -9999px;
+          background-color: rgb(166, 166, 166, 0.2);
+          z-index: -1;
+        }
+        #area-chart {
+          position: static;
+          position: absolute;
+          top: 1300%;
+          left: 160%;
+          transform: translate(-50%, -50%);
+        }
+        p {
+            font-family: Georgia, serif;
+            font-size: 35px;
+            color: rgb(166, 166, 166);
+        }
+        h3 {
+            font-family: Georgia, serif;
+
+            color: rgb(166, 166, 166);
+        }
+        </style>
+    </head>
+    <body>
+    <center><p>{{name}}</p></center>
+    <center>
+        <h3 id="a">
+    <script>
+        if ({{a}} == 0){
+            document.write("No cleaning for this week");}
+        else{
+            if({{a}} == 1){
+                document.write("Next cleaning after: " + {{a}} + " day");}
+            else{document.write("Next cleaning after: " + {{a}} + " days");}}
+    </script></h3>
+    </center>
+<div class="container">
+
+        </div>
+
+<div class="container">
+
+	<table>
+		<thead>
+			<tr>
+				<th>Date</th>
+                <th>Temp</th>
+                <th>Hum</th>
+                <th>Wind_S</th>
+                <th>Wind_D</th>
+                <th>Preci</th>
+                <th>IP</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for x in weather_rep%}
+   <tr>
+        <td>{{x.date}}</td>
+        <td>{{x.temperature}}</td>
+        <td>{{x.humidity}}</td>
+        <td>{{x.wind_speed}}</td>
+        <td>{{x.wind_degree}}</td>
+        <td>{{x.preci}}</td>
+        <td>{{x.IP}}</td>
+    </tr>
+    {% endfor %}
+
+		</tbody>
+	</table>
+</div>
+
+    <div class="col-sm-6 text-center">
+        <label id="p"></label>
+      <div id="area-chart" ></div>
+    </div>
+
+
+
+<!-- partial -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js'></script>
+    <script>
+
+        var data = [
+            {% for x in weather_rep%}
+                  { y: '{{x.date}}', a: {{x.IP}}},
+            {% endfor %}
+    ];
+    config = {
+      data: data,
+      xkey: 'y',
+      ykeys: ['a'],
+      labels: ['result_IP'],
+      fillOpacity: 0.6,
+      hideHover: 'auto',
+      behaveLikeLine: true,
+      resize: true,
+      pointFillColors:['#ffffff'],
+      pointStrokeColors: ['black'],
+      lineColors:['gray','red']
+  };
+config.element = 'area-chart';
+Morris.Area(config);
+
+    </script>
+    </body>
+
+
+</html>
